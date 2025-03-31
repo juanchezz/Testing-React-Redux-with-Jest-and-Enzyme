@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/juanchezz/Testing-React-Redux-with-Jest-and-Enzyme.git'
+                git branch: 'master', url: 'https://github.com/juanchezz/Testing-React-Redux-with-Jest-and-Enzyme.git'
             }
         }
 
