@@ -5,6 +5,10 @@ pipeline {
         }
     }
 
+    triggers {
+        pollSCM('H/15 * * * *') // Revisión automática cada 15 minutos
+    }
+
     environment {
         NODE_ENV = 'production'
         DEPLOY_DIR = '/var/www/miapp'
@@ -19,28 +23,24 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Instalando dependencias...'
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Construyendo la app...'
                 sh 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Ejecutando tests...'
                 sh 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Desplegando app en el contenedor...'
                 sh '''
                     mkdir -p $DEPLOY_DIR
                     rm -rf $DEPLOY_DIR/*
@@ -52,10 +52,10 @@ pipeline {
 
     post {
         success {
-            echo 'CI/CD ejecutado correctamente ✅'
+            echo 'Despliegue exitoso'
         }
         failure {
-            echo 'Algo ha fallado en el pipeline ❌'
+            echo 'Algo falló en el pipeline'
         }
     }
 }
