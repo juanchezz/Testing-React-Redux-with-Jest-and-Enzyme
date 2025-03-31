@@ -23,9 +23,6 @@ pipeline {
         skipDefaultCheckout true
     }
 
-    environment {
-    }
-
     post {
         always {
             echo 'Pipeline finalizado (éxito o fallo).'
