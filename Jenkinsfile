@@ -1,9 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
 
     environment {
         NODE_ENV = 'production'
-        DEPLOY_DIR = '/var/www/miapp'  // Cambia esta ruta según dónde quieras desplegar
+        DEPLOY_DIR = '/var/www/miapp'
     }
 
     stages {
